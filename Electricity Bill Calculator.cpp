@@ -31,7 +31,7 @@ int main()
 
 		else if (option > 5)
 		{
-			cout << "Please enter options within the range... returning to menu" << endl;
+			cout << "Please enter options within range... returning to menu" << endl;
 			continue;
 		}
 
