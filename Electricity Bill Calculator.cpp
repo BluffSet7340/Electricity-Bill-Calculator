@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cctype>
+#include <iomanip>
 using namespace std;
 
 void menu(); //main menu
@@ -18,12 +19,12 @@ int main()
 	{
 		menu();
 		cout << "Option: ";
-		cin >> option;
+		cin >> setw(1) >> option; //setw(1) ensures that only one number is taken as input, the rest is ignored
 
-		if (cin.fail()) //if the user enters any character for an integer variable
+		if (cin.fail()) //if the input doesnt match datatype type, cin runs in an infinite loop with newlines
 		{
 			cin.clear();//clears cin buffer
-			cin.ignore();
+			cin.ignore(INT_MAX, '\n'); //ignores all the garbage input
 			cout << "Input only the options listed in the menu.... try again" << endl;
 			
 			continue;//moves on to the next iteration of the loop
