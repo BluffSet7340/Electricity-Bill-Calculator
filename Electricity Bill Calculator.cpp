@@ -7,11 +7,65 @@ using namespace std;
 void menu(); //main menu
 void aboutProgram(); //about the program
 
-ofstream output;
+class Appliance {
+private:
+	string name;
+	double voltage;
+	double current;
+	double power;
+public:
+	Appliance()
+	{
+		voltage = 0.0;
+		current = 0.0;
+		power = 0.0;
+	}
+	Appliance(double v, double c, double p)
+	{
+		voltage = v;
+		current = c;
+		power = p;
+	}
+
+	void set_v(double v)
+	{
+		voltage = v;
+	}
+	void set_c(double c)
+	{
+		current = c;
+	}
+	void set_p(double p)
+	{
+		power = p;
+	}
+
+	double get_v()
+	{
+		return voltage;
+	}
+	double get_c()
+	{
+		return current;
+	}
+	double get_p()
+	{
+		return power;
+	}
+
+	double getWatts()
+	{
+		power = voltage * current;
+		return power;
+	}
+};
 
 int main()
 {
-	double electrcityConsumed, costPerUnitofElectricity, electricityBill = 0, voltage, current, power;
+	ofstream output;
+	output.open("Electricity Bill.txt");
+
+	double electricityConsumed, costPerUnitofElectricity, electricityBill = 0, voltage, current;
 	int option, deviceNo;
 	char response;
 
@@ -39,10 +93,12 @@ int main()
 		else if (option == 1)
 		{
 			cout << "Enter the units of electricity consumed for the month (in kWh): ";
-			cin >> electrcityConsumed;
+			cin >> electricityConsumed;
+
 			cout << "Enter the cost per unit of electrcity consumed (cost/kWh): ";
 			cin >> costPerUnitofElectricity;
-			electricityBill = electrcityConsumed * costPerUnitofElectricity;
+
+			electricityBill = electricityConsumed * costPerUnitofElectricity;
 			cout << "Your electricity bill is: " << electricityBill << endl;
 		}
 
@@ -55,8 +111,6 @@ int main()
 				continue;
 			}
 
-			output.open("Electricity Bill.txt");
-
 			output << "Your electricity bill is " << electricityBill << endl;
 
 			cout << "Your bill has been saved to a file named 'Electricity Bill.txt'" << endl;
@@ -65,27 +119,36 @@ int main()
 
 		else if (option == 3)
 		{
-			cout << "First, look for the product label, usually on the back of the device and note down the voltage (in volts) and current (in amps)" << endl;
+			cout << "Look at the product label, usually on " 
+				<< "the back of the device and note down the voltage(in volts) and current(in amps)" << endl;
+
 			cout << "How many devices do you want to enter: ";
 			cin >> deviceNo;
+			
+			Appliance* apps = new Appliance[deviceNo];
+
 			cout << "Do you want to save each device wattage to a file? (Y/N): ";
 			cin >> response;
 
-			for (int i = 1; i <= deviceNo; i++)
+			for (int i = 0; i < deviceNo; i++)
 			{
 
 				cout << "Enter the voltage: ";
 				cin >> voltage;
+				apps[i].set_v(voltage);
+
 				cout << "Enter the current: ";
 				cin >> current;
-				power = voltage * current;
-				cout << "The wattage (in Watts) of device "<< i << " is = " << power << "W" << endl;
+				apps[i].set_c(current);
+
+				cout << "The wattage (in Watts) of device "<< i+1 << " is = " << apps[i].getWatts() << "W" << endl;
 
 				if (response == 'Y')
 				{
-					output << "The wattage of device " << i <<  " is = " << power << "W" << endl;
+					output << "The wattage of device " << i+1 <<  " is = " << apps[i].get_p() << "W" << endl;
 				}
 			}
+			delete[] apps;
 		}
 
 		else if (option == 4)
@@ -93,7 +156,6 @@ int main()
 			aboutProgram();
 		}
 
-		
 	} while (option != 5);
 
 	output.close();
