@@ -2,63 +2,11 @@
 #include <fstream>
 #include <cctype>
 #include <iomanip>
+#include "Appliance.h"
 using namespace std;
 
 void menu(); //main menu
 void aboutProgram(); //about the program
-
-class Appliance {
-private:
-	string name;
-	double voltage;
-	double current;
-	double power;
-public:
-	Appliance()
-	{
-		voltage = 0.0;
-		current = 0.0;
-		power = 0.0;
-	}
-	Appliance(double v, double c, double p)
-	{
-		voltage = v;
-		current = c;
-		power = p;
-	}
-
-	void set_v(double v)
-	{
-		voltage = v;
-	}
-	void set_c(double c)
-	{
-		current = c;
-	}
-	void set_p(double p)
-	{
-		power = p;
-	}
-
-	double get_v()
-	{
-		return voltage;
-	}
-	double get_c()
-	{
-		return current;
-	}
-	double get_p()
-	{
-		return power;
-	}
-
-	double getWatts()
-	{
-		power = voltage * current;
-		return power;
-	}
-};
 
 int main()
 {
@@ -177,5 +125,5 @@ void menu()
 
 void aboutProgram()
 {
-	cout << "This is a simple application that calculates your electric bill. More features will be added soon....." << endl;
+	cout << "A console application that calculates your electric bill. More features will be added soon....." << endl;
 }

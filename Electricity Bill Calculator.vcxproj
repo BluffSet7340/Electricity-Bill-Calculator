@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Appliance.cpp" />
     <ClCompile Include="Electricity Bill Calculator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Appliance.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

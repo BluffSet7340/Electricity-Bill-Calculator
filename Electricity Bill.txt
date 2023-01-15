@@ -1,4 +1,4 @@
-Your electricity bill is 1.93896e+13
-The wattage of device 1 is = 4368W
-The wattage of device 2 is = 2278W
-The wattage of device 3 is = 21141W
+Your electricity bill is 1164.46
+The wattage of device 1 is = 30W
+The wattage of device 2 is = 12W
+The wattage of device 3 is = 56W
